@@ -532,9 +532,9 @@ export default {
             }
           });
 
-          const lstDead = JSON.stringify(...this.memberDead);
+          const lstDead = JSON.stringify(this.memberDead);
 
-          localStorage.setItem("memberDead", ...lstDead);
+          localStorage.setItem("memberDead", lstDead);
           this.memberDeadStore = JSON.parse(localStorage.getItem("memberDead"));
         } else {
           this.$swal.fire({
@@ -632,7 +632,7 @@ export default {
           if (status === "Phù thủy ném bình") {
             this.$swal.fire({
               icon: "info",
-              title: "Khong thể cứu vì bị ném bình!",
+              title: "Không thể cứu vì bị ném bình!",
               showDenyButton: false,
               showCancelButton: false,
               confirmButtonText: "OK",
