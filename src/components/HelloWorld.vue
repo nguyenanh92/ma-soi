@@ -240,14 +240,14 @@
                 <button
                   type="button"
                   class="btn btn-success btn-sm"
-                  @click="actionViewer(item.id, 1)"
+                  @click="actionViewer(item.id, 1 , item.status)"
                 >
                   Phùy Thủy Cứu
                 </button>
                 <button
                   type="button"
                   class="btn btn-dark btn-sm"
-                  @click="actionViewer(item.id, 2)"
+                  @click="actionViewer(item.id, 2, null)"
                 >
                   Hồi Sinh
                 </button>
@@ -615,7 +615,7 @@ export default {
         this.memberDeadStore = JSON.parse(localStorage.getItem("memberDead"));
       }
     },
-    actionViewer(id, type) {
+    actionViewer(id, type, status) {
       if (type == 1) {
         if (this.binhCuu === 0) {
           this.$swal.fire({
@@ -626,40 +626,52 @@ export default {
             confirmButtonText: "OK",
           });
         } else {
-          if (localStorage.getItem("binhCuu")) {
-            localStorage.setItem("binhCuu", 0);
-            this.binhCuu = JSON.parse(localStorage.getItem("binhCuu"));
-          }
-
-          let data = this.memberDeadStore.map((item, index) => {
-            if (item.id == id) {
-              item.dead = false;
-              item.status = "Phù thủy cứu";
+          if (status === "Phù thủy ném bình") {
+            this.$swal.fire({
+              icon: "info",
+              title: "Khong thể cứu vì bị ném bình!",
+              showDenyButton: false,
+              showCancelButton: false,
+              confirmButtonText: "OK",
+            });
+          } else {
+            if (localStorage.getItem("binhCuu")) {
+              localStorage.setItem("binhCuu", 0);
+              this.binhCuu = JSON.parse(localStorage.getItem("binhCuu"));
             }
-            return item;
-          });
 
-          const dead = JSON.stringify(data.filter((a) => a.dead === true));
-          localStorage.setItem("memberDead", dead);
-          this.memberDeadStore = JSON.parse(localStorage.getItem("memberDead"));
+            let data = this.memberDeadStore.map((item, index) => {
+              if (item.id == id) {
+                item.dead = false;
+                item.status = "Phù thủy cứu";
+              }
+              return item;
+            });
 
-          if (localStorage.getItem("memberLive")) {
-            this.memberAlive = JSON.parse(localStorage.getItem("memberLive"));
-          }
+            const dead = JSON.stringify(data.filter((a) => a.dead === true));
+            localStorage.setItem("memberDead", dead);
+            this.memberDeadStore = JSON.parse(
+              localStorage.getItem("memberDead")
+            );
 
-          const alive = data.map((item, index) => {
-            if (item.dead == false) {
-              this.memberAlive.unshift(item);
+            if (localStorage.getItem("memberLive")) {
+              this.memberAlive = JSON.parse(localStorage.getItem("memberLive"));
             }
-          });
 
-          console.log(this.memberAlive);
+            const alive = data.map((item, index) => {
+              if (item.dead == false) {
+                this.memberAlive.unshift(item);
+              }
+            });
 
-          const lstAlive = JSON.stringify(this.memberAlive);
-          localStorage.setItem("memberLive", lstAlive);
-          this.memberAliveStore = JSON.parse(
-            localStorage.getItem("memberLive")
-          );
+            console.log(this.memberAlive);
+
+            const lstAlive = JSON.stringify(this.memberAlive);
+            localStorage.setItem("memberLive", lstAlive);
+            this.memberAliveStore = JSON.parse(
+              localStorage.getItem("memberLive")
+            );
+          }
         }
       }
 
