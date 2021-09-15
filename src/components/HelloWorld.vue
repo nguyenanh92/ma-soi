@@ -51,6 +51,7 @@
                 aria-label="Recipient's username"
                 aria-describedby="button-addon2"
                 v-model="newMember"
+                v-on:keyup.enter="addMember"
               />
               <button
                 class="btn btn-secondary"
@@ -98,6 +99,7 @@
                 placeholder="Nhập tên role"
                 aria-label="Recipient's username"
                 aria-describedby="button-addon2"
+                v-on:keyup.enter="addRole"
               />
               <button
                 class="btn btn-secondary"
