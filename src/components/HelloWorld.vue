@@ -240,7 +240,7 @@
                 <button
                   type="button"
                   class="btn btn-success btn-sm"
-                  @click="actionViewer(item.id, 1 , item.status)"
+                  @click="actionViewer(item.id, 1, item.status)"
                 >
                   Phùy Thủy Cứu
                 </button>
@@ -301,6 +301,7 @@ export default {
         // this.cats = JSON.parse(localStorage.getItem('listRole'));
         const parsed = JSON.stringify(this.listRole);
         localStorage.setItem("listRole", parsed);
+        this.thisListRole = JSON.parse(localStorage.getItem("listRole"));
       } catch (e) {
         localStorage.removeItem("listRole");
       }
