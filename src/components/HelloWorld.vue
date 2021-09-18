@@ -276,12 +276,12 @@ export default {
       note: null,
       listRole: [
         { id: this.$uuid.v4(), role: "Sói" },
-        { id: this.$uuid.v4(), role: "Sói" },
-        { id: this.$uuid.v4(), role: "Dân" },
         { id: this.$uuid.v4(), role: "Dân" },
         { id: this.$uuid.v4(), role: "Phùy Thủy" },
         { id: this.$uuid.v4(), role: "Bán Sói" },
         { id: this.$uuid.v4(), role: "Tiên Tri" },
+        { id: this.$uuid.v4(), role: "Sói" },
+        { id: this.$uuid.v4(), role: "Dân" },
         { id: this.$uuid.v4(), role: "Sói Fake" },
         { id: this.$uuid.v4(), role: "Bảo vệ" },
       ],
@@ -344,8 +344,6 @@ export default {
       if (!this.newRole) {
         return;
       }
-      // this.cats.push(this.newCat);
-      // let id = Math.floor(Math.random() * 10000);
 
       let newItem = {
         id: this.$uuid.v4(),
